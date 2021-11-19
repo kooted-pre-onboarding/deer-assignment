@@ -36,7 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'corsheaders',
+    'core',
+    'members',
+    'areas',
+    'use',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +81,7 @@ WSGI_APPLICATION = 'deer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE'  : 'django.db.backends.mysql',
+        'ENGINE'  : 'django.contrib.gis.db.backends.mysql',
         'NAME'    : os.environ['DEER_DB_NAME'],
         'USER'    : os.environ['DEER_DB_USER'],
         'PASSWORD': os.environ['DEER_DB_PASSWORD'],
