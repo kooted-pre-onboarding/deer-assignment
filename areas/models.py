@@ -16,6 +16,7 @@ class ParkingZone(TimeStampModel):
     center_lat = models.DecimalField(max_digits=30, decimal_places=20)
     center_lng = models.DecimalField(max_digits=30, decimal_places=20)
     radius     = models.DecimalField(max_digits=30, decimal_places=20)
+    area       = models.ForeignKey(Area, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'parking_zones'
