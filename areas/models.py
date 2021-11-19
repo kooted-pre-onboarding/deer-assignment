@@ -6,7 +6,7 @@ class Area(TimeStampModel):
     boundary   = models.PolygonField()
     center_lat = models.DecimalField(max_digits=30, decimal_places=20)
     center_lng = models.DecimalField(max_digits=30, decimal_places=20)
-    coords     = models.TextField()
+    coords     = models.LineStringField()
     rate_plan  = models.ForeignKey('RatePlan', null=True, on_delete=models.SET_NULL)
 
     class Meta:
@@ -22,7 +22,7 @@ class ParkingZone(TimeStampModel):
         
 class ForbiddenArea(TimeStampModel):
     boundary = models.PolygonField()
-    coords   = models.TextField()
+    coords   = models.LineStringField()
 
     class Meta:
         db_table = 'forbidden_areas'
