@@ -1,21 +1,17 @@
-import json
-from datetime       import datetime, timedelta
+import json, datetime
 
 from django.views   import View
 from django.http    import JsonResponse
 
 from members.models import Member
-
 from .models        import Use, Deer
-from utils          import *
+from utils          import add_fee, discount_fee, calculate_time, convert_time
 
 class UseView(View):
     def post(self, request):
         try:
             data      = json.loads(request.body)
             
-            end_lat   = data['end_lat']
-            end_lng   = data['end_lng']
             deer_name = data['deer_name']
             member    = Member.objects.get(id=data["member"])
             deer      = Deer.objects.select_related('area').get(name=deer_name)
@@ -35,13 +31,13 @@ class UseView(View):
             
             use_time = calculate_time(use.start_at, use.end_at)
             
-            if use_time <= timedelta(seconds=60):
+            if use_time <= datetime.timedelta(seconds=60):
                 return JsonResponse({'message' : 'CREATED', 'cost' : 0}, status = 201)
             
-            total_fee = rate_plan.basic + ((use_time.seconds // 60 )) * rate_plan.per_minute
+            total_fee = rate_plan.basic + (use_time.seconds // 60) * rate_plan.per_minute
             
-            if Use.objects.filter(member=member, end_at__lte=convert_time(use.start_at) - timedelta(seconds=1800)).exists():
-                total_fee = ((use_time.seconds // 60 )) * rate_plan.per_minute
+            if Use.objects.filter(member=member, end_at__lte=convert_time(use.start_at) - datetime.timedelta(seconds=1800)).exists():
+                total_fee = (use_time.seconds // 60) * rate_plan.per_minute
             
             adjusted_fee = add_fee(deer, member, discount_fee(deer, member, total_fee))
             

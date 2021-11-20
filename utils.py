@@ -1,5 +1,3 @@
-import json
-
 from datetime                import datetime
 from django.contrib.gis.geos import Point
 
@@ -23,7 +21,6 @@ def add_fee(deer, member, total_fee):
     arrive_point = Point((use.end_lat, use.end_lng))
     surcharge    = 0
     
-    areas           = Area.objects.all()
     forbidden_areas = ForbiddenArea.objects.all()
     
     for forbidden_area in forbidden_areas:
@@ -43,5 +40,4 @@ def calculate_time(start, end):
     return end_time - start_time
 
 def convert_time(time):
-    
     return datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
