@@ -5,15 +5,17 @@ from django.http    import JsonResponse
 
 from members.models import Member
 from .models        import Use, Deer
+from members.utils  import login_decorator
 from utils          import add_fee, discount_fee, calculate_time, convert_time
 
 class UseView(View):
+    @login_decorator
     def post(self, request):
         try:
             data      = json.loads(request.body)
             
             deer_name = data['deer_name']
-            member    = Member.objects.get(id=data["member"])
+            member    = request.member
             deer      = Deer.objects.select_related('area').get(name=deer_name)
             rate_plan = deer.area.rate_plan
             
