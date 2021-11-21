@@ -3,7 +3,6 @@ import json, datetime
 from django.views   import View
 from django.http    import JsonResponse
 
-from members.models import Member
 from .models        import Use, Deer
 from members.utils  import login_decorator
 from utils          import add_fee, discount_fee, calculate_time, convert_time
@@ -37,13 +36,14 @@ class UseView(View):
                 return JsonResponse({'message' : 'CREATED', 'cost' : 0}, status = 201)
             
             total_fee = rate_plan.basic + (use_time.seconds // 60) * rate_plan.per_minute
+            use_list = Use.objects.filter(member=member, end_at__gte=convert_time(use.start_at) - datetime.timedelta(seconds=1800))
             
-            if Use.objects.filter(member=member, end_at__lte=convert_time(use.start_at) - datetime.timedelta(seconds=1800)).exists():
+            if use_list.exclude(id=use.id).exists():
                 total_fee = (use_time.seconds // 60) * rate_plan.per_minute
             
             adjusted_fee = add_fee(deer, member, discount_fee(deer, member, total_fee))
             
-            return JsonResponse({'message' : 'CREATED', 'cost' : adjusted_fee}, status = 201)
+            return JsonResponse({'message' : 'CREATED', 'cost' : round(adjusted_fee, -1)}, status = 201)
             
         except KeyError:
             return JsonResponse({'message' : 'KEY_ERROR'}, status = 400)
