@@ -1,0 +1,43 @@
+version: "3"
+
+volumes:
+  data: {}
+
+services:
+  api:
+    image: kjhabc2002/deer-assignment
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+    volumes:
+      - .:/app/
+    ports:
+      - 8000:8000
+    restart: always
+    env_file: .env
+    command: >-
+      sh -c 'python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000'
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    container_name: DEER_DB_HOST
+    environment:
+        DEER_DB_NAME : deer
+        DEER_DB_USER : root
+        DEER_DB_PASSWORD : dudn12!Rhfl
+        DEER_DB_HOST : 127.0.0.1
+        DEER_DB_PORT : 3306
+
+    command: 
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+    expose:
+      - "3306"
+
+  
+    
