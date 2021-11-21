@@ -23,7 +23,7 @@ services:
       - db
   db:
     image: mysql:5.7
-    container_name: DEER_DB_HOST
+    container_name: db
     environment:
         DEER_DB_NAME : deer
         DEER_DB_USER : root

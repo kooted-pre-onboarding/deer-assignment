@@ -86,6 +86,7 @@ DATABASES = {
         'NAME'    : os.environ['DEER_DB_NAME'],
         'USER'    : os.environ['DEER_DB_USER'],
         'PASSWORD': os.environ['DEER_DB_PASSWORD'],
+        'HOST'    : 'db',
         'HOST'    : os.environ['DEER_DB_HOST'],
         'PORT'    : os.environ['DEER_DB_PORT']
     }
