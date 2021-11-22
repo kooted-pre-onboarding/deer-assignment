@@ -28,7 +28,7 @@
 | 👨🏻‍🦳 양가현 | [chrisyang256](https://github.com/chrisyang256) | 조건에 따른 벌금 API view, unit test, postman api            |
 | 👶🏻 구본욱  | [qhsdnr0](https://github.com/qhsdnr0)           | 주차 및 금지구역 API view, unit test, postman api, README 작성 |
 | 👰🏻‍♂️ 이다빈 | [thisisempty](https://github.com/thisisempty)   | 새로운 할인/벌금 조건 확장성 설계,  postman api, AWS (EC2/RDS) 배포 |
-| 🦹🏻‍♂️ 문승준 | [palza4dev](https://github.com/palza4dev)       | User API 및 확장성 설계 , unit test,  postman api, README 작성 |
+| 🦹🏻‍♂️ 문승준 | [palza4dev](https://github.com/palza4dev)       | Member API 및 확장성 설계 , unit test,  postman api, README 작성 |
 | 🥷 김지훈   | [kimfa123](https://github.com/kimfa123)         | 조건에 따른 벌금 API view, unit test,  postman api, README 작성 |
 
 ㅤ👪 공동작업: DB Modeling
@@ -148,7 +148,7 @@
 
 <br/>
 
-![스크린샷 2021-11-18 오후 7 37 20](https://user-images.githubusercontent.com/89339349/142789122-c7b31748-f82f-4b6b-855a-05ab669b7879.png)
+![스크린샷 2021-11-22 오후 2 39 47](https://user-images.githubusercontent.com/72376931/142807745-06969b55-19e5-4660-8654-a3b628572056.png)
 
 <br/>
 
@@ -255,7 +255,7 @@ DEER_DB_GDAL='해당모듈'
 > ## API Document & Test 
 
 
-1. [Postman API 문서 링크](https://documenter.getpostman.com/view/18212222/UVJWrL9Z)로 접속해 우측 상단의 `Run in Postman` 버튼을 클릭합니다.
+1. [Postman API 문서 링크](https://documenter.getpostman.com/view/18218753/UVJWr1CU#c54fbfa6-dffc-472b-9787-7639cf00a881)로 접속해 우측 상단의 `Run in Postman` 버튼을 클릭합니다.
 2. 개인 Workspace로 Import 합니다.
 3. hostname 환경변수를 deploy로 선택합니다.
 4. 배포 주소 `13.125.45.93:8000` 를 확인합니다. 
